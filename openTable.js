@@ -17,9 +17,14 @@ exports.checkTimes = async (restaurantCode, partySize, requestedDate, requestedT
         await page.click(`[aria-label="${requestedDate}"]`) // Sat, Mar 28, 2020
         await page.select(`[data-auto="timeSlotsSelectMenu"]`, requestedTime) // 2020-03-28T20:00:00
         await page.click(`[data-auto="findATableButton"]`)
-        await page.waitFor('.f2cc84a2')
+        // wait for either successful available times (.f2cc84a2), or message that no times are available (.fd4148d6)
+        await page.waitFor(() => 
+            document.querySelectorAll('.f2cc84a2, .fd4148d6' ).length
+          );
+
         const times = await page.evaluate(() => Array.from(document.querySelectorAll('[data-auto="timeslot"]'), element => element.textContent));
         
+        // screenshot of results if we want it.
         // await page.screenshot({path: 'reservations.png'});
     
         // close brower when we are done
