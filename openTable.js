@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 
 exports.checkTimes = async (restaurantCode, partySize, requestedDate, requestedTime) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
       const page = await browser.newPage();
     
       await page.goto(`https://www.opentable.com/r/${restaurantCode}`);
