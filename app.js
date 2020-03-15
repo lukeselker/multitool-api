@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const OpenTable = require('./openTable')
 let app = express();
+var cors = require('cors');
 var port = process.env.PORT || 3008;
 
 app.use(bodyParser.json());
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
