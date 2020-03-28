@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const OpenTable = require('./src/openTable');
-const Sendgrid = require('./src/sendMail');
+const OpenTable = require('./openTable');
+const Sendgrid = require('./sendMail');
 let app = express();
 var cors = require('cors');
 var port = process.env.PORT || 3008;
